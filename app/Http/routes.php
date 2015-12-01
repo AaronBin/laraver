@@ -12,7 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome')->with('name','laravel');
+    return view('welcome')->with('name','Laravel');
 });
 
 Route::get('/about', 'AboutController@index');
+
+Route::get('/test', 'TestController@index');
+
+
+Route::get('/sphinx', 'SphinxController@sphinx');
+Route::get('/sphinx/search', 'SphinxController@sphinxSearch');
+
+
+Route::get('/data', 'SphinxController@data');
