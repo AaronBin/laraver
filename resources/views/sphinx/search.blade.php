@@ -54,7 +54,7 @@
                     <table>
                         <tr><th>标题</th><th>内容</th></tr>
                         @foreach($data['list'] as $val)
-                            <tr><td>{!! $val->title !!}</td><td>{!! $val->content !!}}</td></tr>
+                            <tr><td>{!! $val->title !!}</td><td>{!! $val->content !!}</td></tr>
                         @endforeach
                     </table>
                   </div>
