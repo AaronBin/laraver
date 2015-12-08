@@ -33,7 +33,7 @@ class SphinxController extends Controller
         $search = $request->get('search');
 
 
-        //sphinx的主机名和端口
+        //sphinx的主机名和端口  //mysql -h 127.0.0.1 -P 9306
         $sphinx->SetServer('127.0.0.1',9312);
 
         //设定搜索模式 SPH_MATCH_ALL(匹配所有的查询词)
@@ -41,6 +41,7 @@ class SphinxController extends Controller
 
         //设置返回结果集为数组格式
         $sphinx->SetArrayResult(true);
+
 
         //匹配结果的偏移量，参数的意义依次为：起始位置，返回结果条数，最大匹配条数
         $sphinx->SetLimits(0,20,1000);
@@ -52,6 +53,9 @@ class SphinxController extends Controller
         //索引源是配置文件中的 index 类，如果有多个索引源可使用,号隔开：'email,diary' 或者使用'*'号代表全部索引源
 
         $result = $sphinx->query($search,'*');
+
+
+        //返回值说明  total 本次查询返回条数  total_found 一共检索到多少条   docs 在多少文档中出现  hits——共出现了多少次
 
         //关闭查询连接
         $sphinx->close();
@@ -73,7 +77,8 @@ class SphinxController extends Controller
 
         $list = DB::select("SELECT * from documents WHERE id IN ($ids)");
         if(!empty($list)){
-            foreach($list as $key=>$val){
+            foreach($list as $key=>$val)
+            {
                 $val->content = str_replace($search,'<span style="color: red;">'.$search.'</span>',$val->content);
                 $val->title = str_replace($search,'<span style="color: red;">'.$search.'</span>',$val->title);
             }
