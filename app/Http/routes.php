@@ -25,3 +25,17 @@ Route::get('/sphinx/search', 'SphinxController@sphinxSearch');
 
 
 Route::get('/data', 'SphinxController@data');
+
+
+
+Route::get('/test1', 'Admin\AdminController@indexxx',['middleware'=>'admin']);
+
+Route::group(['middleware' => 'admin'], function() {
+
+});
+
+/*Route::group(['namespaces'=>'Admin'],['middleware'=>'Admin.handle'],function(){
+});
+
+Route::group(['middleware' => ['AdminMiddleware.foo','AdminMiddleware.bar']],function(){
+});
